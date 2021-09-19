@@ -5,3 +5,7 @@ from flask import render_template
 @server.route("/")
 def index():
   return render_template("index.html")
+
+@server.route("/table")
+def table():
+  return render_template("table.html")
