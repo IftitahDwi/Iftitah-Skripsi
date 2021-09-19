@@ -5,10 +5,10 @@ from flask import render_template
 @server.route("/")
 def index():
   ###create data
-  req_user = User(username="jos", email="jos@gg.com")
-  db.session.add(req_user)
-  db.session.commit()
-  print("data sudah masuk")
+  # req_user = User(username="jos", email="jos@gg.com")
+  # db.session.add(req_user)
+  # db.session.commit()
+  # print("data sudah masuk")
 
   ###delete data
   # del_user = User.query.filter_by(id="3").delete()
@@ -28,6 +28,7 @@ def index():
   
   ###get all data
   user = User.query.all()
+  print(user)
   # people = {
   #   "name":"hendi",
   #   "age":24,
