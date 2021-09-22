@@ -8,4 +8,6 @@ server.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///system.db"
 db = SQLAlchemy(server)
 migrate = Migrate(server, db)
 
-from app import views
+from app.views import Home
+from app.views import Table
+# from app import views
