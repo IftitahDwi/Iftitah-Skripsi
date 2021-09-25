@@ -18,6 +18,11 @@
     <!-- Custom styles for this template-->
     <link href={{url_for('static', filename='css/sb-admin-2.min.css')}}
     rel="stylesheet" />
+
+    <!-- Custom styles for this page -->
+     <link href={{url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.css')}} rel="stylesheet">
+
+    <!-- Custom styles for this page -->
     <link href={{url_for('static', filename='css/custom.css')}}
     rel="stylesheet" />
   </head>
@@ -42,7 +47,7 @@
 
             <!-- Nav Item - Dashboard -->
             {{ nav_link('index', 'Home') }}
-            {{ nav_link('table', 'About') }}
+            {{ nav_link('load_data', 'Load Data') }}
     
         </ul>
         <!-- End of Sidebar -->
@@ -116,10 +121,11 @@
   <script src={{url_for('static', filename='js/sb-admin-2.min.js')}}></script>
 
   <!-- Page level plugins -->
-  <script src={{url_for('static', filename='vendor/chart.js/Chart.min.js')}}></script>
+  <script src={{url_for('static', filename='vendor/datatables/jquery.dataTables.min.js')}}></script>
+  <script src={{url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.js')}}></script>
 
   <!-- Page level custom scripts -->
-  <!-- <script src={{url_for('static', filename='js/demo/chart-area-demo.js')}}></script>
-  <script src={{url_for('static', filename='js/demo/chart-pie-demo.js')}}></script> -->
+  <script src={{url_for('static', filename='js/demo/datatables-demo.js')}}></script>
+
   </body>
 </html>

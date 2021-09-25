@@ -9,5 +9,5 @@ db = SQLAlchemy(server)
 migrate = Migrate(server, db)
 
 from app.views import Home
-from app.views import Table
+from app.views import Load_Data
 # from app import views
