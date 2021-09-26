@@ -1,4 +1,9 @@
-from app.models import db
+# from app import db
+from app import server
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy(server)
+
 
 class DataLoad(db.Model):
   id = db.Column(db.Integer, primary_key=True)
