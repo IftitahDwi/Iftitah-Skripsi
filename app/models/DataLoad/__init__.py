@@ -9,5 +9,5 @@ class DataLoad(db.Model):
   scraped= db.Column(db.Boolean(), unique=False, default=False, nullable=False)
 
   def __repr__(self):
-     return f"User({self.id},{self.load_name}, {self.scraped})"
+     return f"DataLoad({self.id},{self.load_name}, {self.scraped})"
     # return "<User %r>" % self.username
