@@ -16,33 +16,33 @@
 <h1 class="h3 mb-2 text-gray-800">Raw Data with Google Scholar ID</h1>
 
 <!-- DataTales Example -->
-<form>
+<form method="post" action={{url_for('create_load_data')}}>
   <div class="card shadow mb-4">
     <div class="card-body">
       <div class="form-group">
         <div class="row mb-2">
           <div class="col-6">
             <label>NIDN</label>
-            <input type="number" class="form-control" />
+            <input name="nidn" type="number" class="form-control" />
           </div>
           <div class="col-6">
             <label>NIY</label>
-            <input type="number" class="form-control" />
+            <input name="niy" type="number" class="form-control" />
           </div>
         </div>
         <div class="row">
           <div class="col-6">
             <label>Name</label>
-            <input type="text" class="form-control" />
+            <input name="load_name" type="text" class="form-control" />
           </div>
           <div class="col-6">
             <label>Google Scholar ID</label>
-            <input type="number" class="form-control" />
+            <input name="gs_id" type="number" class="form-control" />
           </div>
         </div>
       </div>
       <div class="text-right">
-        <button class="btn btn-danger">Add Item</button>
+        <button type="submit" class="btn btn-danger">Add Item</button>
       </div>
     </div>
   </div>
@@ -85,7 +85,7 @@
               </a>
               <a
                 title="delete item"
-                href="#"
+                href={{url_for("destroy_load_data", id=data.id)}}
                 class="btn btn-danger btn-circle btn-sm ml-1"
               >
                 <i class="fas fa-trash"></i>
