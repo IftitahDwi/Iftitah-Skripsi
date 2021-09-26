@@ -40,7 +40,4 @@ def update_load_data():
     data_load.load_name = load_name
     data_load.gs_id = gs_id
     db.session.commit()
-    # request_data = DataLoad(nidn=nidn, niy=niy, load_name=load_name, gs_id=gs_id)
-    # db.session.add(request_data)
-    # db.session.commit()
   return redirect(url_for('load_data'))
