@@ -4,7 +4,7 @@ from flask import render_template, request, redirect, url_for
 
 @server.route("/load-data")
 def load_data():
-  data_load = DataLoad.query.all()
+  data_load = DataLoad.query.order_by(DataLoad.id.desc())
   return render_template("load_data.html", title="Table", data_load=data_load)
 
 @server.route('/load-data/add', methods=['POST', 'GET'])
