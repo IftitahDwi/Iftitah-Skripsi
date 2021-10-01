@@ -1,4 +1,5 @@
 from app.models import db
+from app.models import Scrapped
 
 class DataLoad(db.Model):
   id = db.Column(db.Integer, primary_key=True)
@@ -6,7 +7,8 @@ class DataLoad(db.Model):
   niy= db.Column(db.String(20), unique=False, nullable=False)
   load_name= db.Column(db.String(50), unique=False, nullable=False)
   gs_id= db.Column(db.String(20), unique=False, nullable=False)
-  scraped= db.Column(db.Boolean(), unique=False, default=False, nullable=False)
+  is_scraped= db.Column(db.Boolean(), unique=False, server_default="0", default=False, nullable=False)
+  scraped= db.relationship('Scrapped', backref='data_load', passive_deletes=True)
 
   def __repr__(self):
      return f"DataLoad({self.id},{self.load_name}, {self.scraped})"

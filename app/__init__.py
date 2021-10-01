@@ -3,7 +3,7 @@ from flask_migrate import Migrate
 
 server = Flask(__name__)
 server.debug = True
-server.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///system.db"
+server.config["SQLALCHEMY_DATABASE_URI"] = "mariadb+pymysql://root@127.0.0.1:3306/apriori"
 
 from app.models import db
 
