@@ -9,5 +9,4 @@ from app.models import db
 
 migrate = Migrate(server, db)
 
-from app.views import Home
-from app.views import Load_Data
+from app.views import Home, Load_Data, Data_Scrapped

@@ -1,0 +1,99 @@
+{% extends "layout.html" %} {% block content %}
+<style>
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+</style>
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Scraping Data from Google Scholar ID</h1>
+
+<!-- DataTales Example -->
+
+<div class="card shadow mb-4">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered"
+        id="dataTable"
+        width="100%"
+        cellspacing="0"
+      >
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>NIDN</th>
+            <th>NIY</th>
+            <th>Name</th>
+            <th>Google Scholar ID</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for data in data_load %}
+          <tr id='data_{{data.id}}'>
+            <td>{{loop.index}}</td>
+            <td>{{data.nidn}}</td>
+            <td>{{data.niy}}</td>
+            <td>{{data.load_name}}</td>
+            <td>{{data.gs_id}}</td>
+            <td class="text-center">
+              <button
+              onClick="editItem('{{data.id}}')"
+                title="edit item"
+                href="#"
+                class="btn btn-success btn-circle btn-sm mr-1"
+              >
+                <i class="fas fa-pen"></i>
+              </button>
+              <a
+                title="delete item"
+                href={{url_for("destroy_load_data", id=data.id)}}
+                class="btn btn-danger btn-circle btn-sm ml-1"
+              >
+                <i class="fas fa-trash"></i>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  function editItem(id){
+    const getEl = document.querySelector(`#data_${id}`);
+    const nidn = getEl.getElementsByTagName('td')[1].textContent
+    const niy = getEl.getElementsByTagName('td')[2].textContent
+    const name = getEl.getElementsByTagName('td')[3].textContent
+    const gs_id = getEl.getElementsByTagName('td')[4].textContent
+    const dataId = Number(id);
+    document.querySelector("#nidn").value = nidn
+    document.querySelector("#niy").value = niy
+    document.querySelector("#name").value = name
+    document.querySelector("#gs_id").value = gs_id
+    document.querySelector("#data_id").value = dataId
+    document.querySelector("#create").style.display = 'none';
+    document.querySelector("#update").style.display = 'inline-block';
+    document.querySelector("#cancel").style.display = 'inline-block';
+    document.querySelector("#formInput").action = "/load-data/edit";
+
+  }
+
+  function cancelBtn(){
+    document.querySelector("#create").style.display = 'inline-block';
+    document.querySelector("#update").style.display = 'none';
+    document.querySelector("#cancel").style.display = 'none';
+    document.querySelector("#formInput").action = "/load-data/add";
+  }
+</script>
+{% endblock %}
