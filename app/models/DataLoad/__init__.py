@@ -10,6 +10,13 @@ class DataLoad(db.Model):
   is_scraped= db.Column(db.Boolean(), unique=False, server_default="0", default=False, nullable=False)
   scraped= db.relationship('Scrapped', backref='data_load', passive_deletes=True)
 
-  def __repr__(self):
-     return f"DataLoad({self.id},{self.load_name}, {self.scraped})"
-    # return "<User %r>" % self.username
+  # def __init__(self):
+  #   pass
+  # def _asdict(self):
+  #       return {c.key: getattr(self, c.key)
+  #               for c in inspect(self).mapper.column_attrs}
+
+  # def __repr__(self):
+  #   return f"{c.key: getattr(self, c.key) for c in db.inspect(self).mapper.column_attrs}"
+  #    return f"DataLoad({self.id},{self.load_name}, {self.is_scraped})"
+  #   # return "<User %r>" % self.username
