@@ -8,5 +8,5 @@ class Scrapped(db.Model):
   data_load_id=db.Column(db.Integer, db.ForeignKey('data_load.id', ondelete='CASCADE'))
 
   def __repr__(self):
-     return f"Scrapped({self.id},{self.scrapped_name}, {self.scraped}, {self.data_load_id})"
+     return f"Scrapped({self.id},{self.scrapped_name}, {self.data_load_id})"
     # return "<User %r>" % self.username  
