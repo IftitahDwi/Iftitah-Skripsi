@@ -2,8 +2,8 @@ from app.models import db
 
 class Scrapped(db.Model):
   id = db.Column(db.Integer, primary_key=True)
-  scrapped_name= db.Column(db.String(60), unique=False, nullable=False)
-  title= db.Column(db.String(50), unique=False, nullable=False)
+  scrapped_name= db.Column(db.String(500), unique=False, nullable=False)
+  title= db.Column(db.String(500), unique=False, nullable=False)
   year= db.Column(db.String(10), unique=False, nullable=False)
   data_load_id=db.Column(db.Integer, db.ForeignKey('data_load.id', ondelete='CASCADE'))
 

@@ -1,8 +1,8 @@
-"""ver 01
+"""empty message
 
-Revision ID: b5d3bd205231
+Revision ID: 24673b5d6c14
 Revises: 
-Create Date: 2021-10-01 20:03:19.162737
+Create Date: 2021-10-02 08:36:51.613705
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'b5d3bd205231'
+revision = '24673b5d6c14'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,15 +22,15 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('nidn', sa.String(length=20), nullable=False),
     sa.Column('niy', sa.String(length=20), nullable=False),
-    sa.Column('load_name', sa.String(length=50), nullable=False),
+    sa.Column('load_name', sa.String(length=100), nullable=False),
     sa.Column('gs_id', sa.String(length=20), nullable=False),
     sa.Column('is_scraped', sa.Boolean(), server_default='0', nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('scrapped',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('scrapped_name', sa.String(length=60), nullable=False),
-    sa.Column('title', sa.String(length=50), nullable=False),
+    sa.Column('scrapped_name', sa.String(length=500), nullable=False),
+    sa.Column('title', sa.String(length=500), nullable=False),
     sa.Column('year', sa.String(length=10), nullable=False),
     sa.Column('data_load_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['data_load_id'], ['data_load.id'], ondelete='CASCADE'),
