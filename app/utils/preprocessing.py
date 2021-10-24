@@ -12,7 +12,7 @@ def case_folding(data_set=[]):
     return result
 
 def lang_detect(data_set=[]):
-    DATA_TRAIN_LANGUAGE = "/home/hdinjos/Documents/learn/python/satuan/tutor_flask/app/utils/model_language/lid.176.bin"
+    DATA_TRAIN_LANGUAGE = "/home/hdinjos/Documents/learn/python/Iftitah-Skripsi/app/utils/model_language/lid.176.bin"
     model = fasttext.load_model(DATA_TRAIN_LANGUAGE)
     result = list(filter(lambda x: model.predict(x["title"])[0][0][9:] == "id", data_set))
     return result
