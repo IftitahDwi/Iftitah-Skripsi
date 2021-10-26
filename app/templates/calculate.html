@@ -1,0 +1,93 @@
+{% extends "layout.html" %} {% block content %}
+<style>
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+</style>
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Calculate Apriori</h1>
+
+<!-- DataTales Example -->
+
+<div class="card shadow mb-4">
+  <div class="card-body">
+    <form id="formInput" method="post" action={{url_for('calculate_process')}}>
+      <div class="row">
+        <div class="col-6 mb-3">
+          <label>Support Minimum(%)</label><span class="text-danger">*</span>
+          <input
+            id="support"
+            name="support"
+            type="number"
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 mb-3">
+          <label>Confidence Minimum(%)</label><span class="text-danger">*</span>
+          <input
+            id="confidence"
+            name="confidence"
+            type="number"
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <label>Publication Total</label>
+          <input
+            name="publication"
+            id="publication"
+            value="{{total_data}}"
+            disabled
+            type="text"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <button id="create" type="submit" class="btn btn-danger mt-4">
+        Process
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+  function editItem(id) {
+    const getEl = document.querySelector(`#data_${id}`);
+    const nidn = getEl.getElementsByTagName("td")[1].textContent;
+    const niy = getEl.getElementsByTagName("td")[2].textContent;
+    const name = getEl.getElementsByTagName("td")[3].textContent;
+    const gs_id = getEl.getElementsByTagName("td")[4].textContent;
+    const dataId = Number(id);
+    document.querySelector("#nidn").value = nidn;
+    document.querySelector("#niy").value = niy;
+    document.querySelector("#name").value = name;
+    document.querySelector("#gs_id").value = gs_id;
+    document.querySelector("#data_id").value = dataId;
+    document.querySelector("#create").style.display = "none";
+    document.querySelector("#update").style.display = "inline-block";
+    document.querySelector("#cancel").style.display = "inline-block";
+    document.querySelector("#formInput").action = "/load-data/edit";
+  }
+
+  function cancelBtn() {
+    document.querySelector("#create").style.display = "inline-block";
+    document.querySelector("#update").style.display = "none";
+    document.querySelector("#cancel").style.display = "none";
+    document.querySelector("#formInput").action = "/load-data/add";
+  }
+</script>
+{% endblock %}
