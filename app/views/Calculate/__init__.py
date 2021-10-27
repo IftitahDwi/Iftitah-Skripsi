@@ -2,7 +2,7 @@ from app import server, db
 from app.models.DataLoad import DataLoad
 from app.models.Scrapped import Scrapped
 from app.utils.to_dict import object_as_dict
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, session
 from app.utils.preprocessing import case_folding, lang_detect, stopword_title, stemmed
 import pandas as pd
 from app.utils.apriori_calculate import call_calc
@@ -16,8 +16,8 @@ def calculate():
 @server.route("/calculate/process", methods=["GET", "POST"])
 def calculate_process():
   if (request.method == 'POST'):
-    support = int(request.form['support'])
-    confidence = int(request.form['confidence'])
+    support = float(request.form['support'])
+    confidence = float(request.form['confidence'])
 
     join_data = db.session.query(Scrapped, DataLoad).filter(DataLoad.id == Scrapped.data_load_id).order_by(Scrapped.id.desc())
     scrapped = []
@@ -43,10 +43,13 @@ def calculate_process():
         data_set_new.append(dn)
       new_data.append(data_set_new)
     
-    data_result = call_calc(new_data,5,6)
+    data_result = call_calc(new_data,support,confidence)
+    session['data_result'] = data_result
     db.session.close()
     return redirect(url_for("calculate_result"))
 
 @server.route("/calculate/result")
 def calculate_result():
-  return render_template("calculate-result.html", datas=data_result)
+  data_result = session.get('data_result', None)
+  print(data_result)
+  return render_template("calculate-result.html", data_result=data_result)

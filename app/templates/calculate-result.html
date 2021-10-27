@@ -32,20 +32,20 @@
         <thead>
           <tr>
             <th>No</th>
-            <th>Name</th>
-            <th>Title</th>
-            <th>Year</th>
-            <th>Google Scholar ID</th>
+            <th>Rule</th>
+            <th>Support</th>
+            <th>Confidence</th>
+            <th>Lift Ratio</th>
           </tr>
           <tbody>
         </thead>
-          {% for data in result_datas %}
+          {% for data in data_result %}
           <tr id='data_{{data.id}}'>
             <td>{{loop.index}}</td>
-            <td>{{data.name}}</td>
-            <td>{{data.title}}</td>
-            <td>{{data.year}}</td>
-            <td>{{data.gs_id}}</td>
+            <td>If the publication contains <strong>{{data.antecedents}}</strong> words, it also contains <strong>{{data.consequents}}</strong> words </td>
+            <td>{{("%.0f"|format(data.support*100))}}%</td>
+            <td>{{"%.0f"|format(data.confidence*100)}}%</td>
+            <td>{{"%.2f"|format(data.lift)}}</td>
           </tr>
           {% endfor %}
         </tbody>
