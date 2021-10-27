@@ -44,12 +44,16 @@ def calculate_process():
       new_data.append(data_set_new)
     
     data_result = call_calc(new_data,support,confidence)
-    session['data_result'] = data_result
-    db.session.close()
-    return redirect(url_for("calculate_result"))
+    if data_result == False:
+      data_result = []
+      session['data_result'] = data_result
+      return redirect(url_for("calculate_result"))
+    else:
+      session['data_result'] = data_result
+      db.session.close()
+      return redirect(url_for("calculate_result"))
 
 @server.route("/calculate/result")
 def calculate_result():
   data_result = session.get('data_result', None)
-  print(data_result)
   return render_template("calculate-result.html", data_result=data_result)

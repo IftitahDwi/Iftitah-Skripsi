@@ -79,14 +79,14 @@
             <td>{{data.load_name}}</td>
             <td>{{data.gs_id}}</td>
             <td class="text-center">
-              <button
+              <!-- <button
               onClick="editItem('{{data.id}}')"
                 title="edit item"
                 href="#"
                 class="btn btn-success btn-circle btn-sm mr-1"
               >
                 <i class="fas fa-pen"></i>
-              </button>
+              </button> -->
               <a
                 title="delete item"
                 href={{url_for("destroy_load_data", id=data.id)}}

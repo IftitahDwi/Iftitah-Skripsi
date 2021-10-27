@@ -41,7 +41,9 @@
             >
               Scrap Data
             </div>
-            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">
+              {{scraped_data}}
+            </div>
           </div>
           <div class="col-auto">
             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -59,9 +61,12 @@
             <div
               class="text-xs font-weight-bold text-danger text-uppercase mb-1"
             >
-              Pending Requests
+              Result
             </div>
-            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">
+              {%if data_result == None:%} {{"No Data"}} {%else%} {{data_result}}
+              {%endif%}
+            </div>
           </div>
           <div class="col-auto">
             <i class="fas fa-comments fa-2x text-gray-300"></i>
