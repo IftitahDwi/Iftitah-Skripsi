@@ -64,8 +64,8 @@
               Result
             </div>
             <div class="h5 mb-0 font-weight-bold text-gray-800">
-              {%if data_result == None:%} {{"No Data"}} {%else%} {{data_result}}
-              {%endif%}
+              {%if data_result == None or data_result == []:%} {{0}} {%else%}
+              {{data_result}} {%endif%}
             </div>
           </div>
           <div class="col-auto">

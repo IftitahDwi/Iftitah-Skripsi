@@ -16,8 +16,9 @@ def calculate():
 @server.route("/calculate/process", methods=["GET", "POST"])
 def calculate_process():
   if (request.method == 'POST'):
-    support = float(request.form['support'])
-    confidence = float(request.form['confidence'])
+    support = float(request.form['support']) / 100
+    print(support)
+    confidence = float(request.form['confidence']) / 100
 
     join_data = db.session.query(Scrapped, DataLoad).filter(DataLoad.id == Scrapped.data_load_id).order_by(Scrapped.id.desc())
     scrapped = []
@@ -46,12 +47,16 @@ def calculate_process():
     data_result = call_calc(new_data,support,confidence)
     if data_result == False:
       data_result = []
-      session['data_result'] = data_result
-      return redirect(url_for("calculate_result"))
+      # session['data_result'] = data_result
+      return render_template("calculate-result.html", data_result=data_result)
+      # return redirect(url_for("calculate_result"))
     else:
-      session['data_result'] = data_result
+      # session['data_result'] = data_result
       db.session.close()
-      return redirect(url_for("calculate_result"))
+      if len(data_result) > 100:
+        data_result = data_result[:100]
+      return render_template("calculate-result.html", data_result=data_result)
+      # return redirect(url_for("calculate_result"))
 
 @server.route("/calculate/result")
 def calculate_result():

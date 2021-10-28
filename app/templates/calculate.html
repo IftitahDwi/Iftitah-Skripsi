@@ -55,7 +55,7 @@
           />
         </div>
       </div>
-      <button id="create" type="submit" class="btn btn-danger mt-4">
+      <button id="process" type="submit" class="btn btn-danger mt-4">
         Process
       </button>
     </form>
@@ -63,29 +63,30 @@
 </div>
 
 <script>
-  function editItem(id) {
-    const getEl = document.querySelector(`#data_${id}`);
-    const nidn = getEl.getElementsByTagName("td")[1].textContent;
-    const niy = getEl.getElementsByTagName("td")[2].textContent;
-    const name = getEl.getElementsByTagName("td")[3].textContent;
-    const gs_id = getEl.getElementsByTagName("td")[4].textContent;
-    const dataId = Number(id);
-    document.querySelector("#nidn").value = nidn;
-    document.querySelector("#niy").value = niy;
-    document.querySelector("#name").value = name;
-    document.querySelector("#gs_id").value = gs_id;
-    document.querySelector("#data_id").value = dataId;
-    document.querySelector("#create").style.display = "none";
-    document.querySelector("#update").style.display = "inline-block";
-    document.querySelector("#cancel").style.display = "inline-block";
-    document.querySelector("#formInput").action = "/load-data/edit";
-  }
+const confidence = document.querySelector("#confidence");
+const support = document.querySelector("#support");
+const btnProcess = document.querySelector("#process")
+btnProcess.disabled = true;
 
-  function cancelBtn() {
-    document.querySelector("#create").style.display = "inline-block";
-    document.querySelector("#update").style.display = "none";
-    document.querySelector("#cancel").style.display = "none";
-    document.querySelector("#formInput").action = "/load-data/add";
+function disabledBtn(){
+  if (confidence.value === '' || support.value === ''){
+    btnProcess.disabled = true;
+  } else {
+    btnProcess.disabled = false;
   }
+}
+
+function checkSupport(){
+  disabledBtn()
+}
+
+function checkConfidence(){
+  disabledBtn()
+}
+
+support.addEventListener("input",checkSupport)
+confidence.addEventListener("input",checkConfidence)
+
+
 </script>
 {% endblock %}

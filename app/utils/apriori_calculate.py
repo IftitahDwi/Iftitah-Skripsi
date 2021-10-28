@@ -13,8 +13,11 @@ def call_calc(data_set, support, confidence):
   else:
     print('######jos')
     print(frequent_itemsets.empty)
+    print(confidence)
     rules = association_rules(frequent_itemsets, metric="lift", min_threshold=1.0)
     rules["antecedents"] = rules["antecedents"].apply(lambda x: ','.join(list(x))).astype("unicode")
     rules["consequents"] = rules["consequents"].apply(lambda x: ','.join(list(x))).astype("unicode")
+    # rules = rules["confidence"].filter(lambda x: x <= confidence)
+    rules[(rules['confidence'] <= confidence)]
     result = rules.to_dict('records')
   return result
