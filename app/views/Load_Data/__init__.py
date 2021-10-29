@@ -47,7 +47,7 @@ def update_load_data():
 def upload_load_data():
   if request.method == "POST":
     file = request.files['file']
-    # file = request.form['file']
     df = pd.read_excel(file)
-    print(df)
+    db.session.bulk_insert_mappings(DataLoad, df.to_dict("records"))
+    db.session.commit()
   return redirect(url_for('load_data'))

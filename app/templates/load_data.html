@@ -56,7 +56,7 @@
         </div>
       </div>
       <div class="text-right">
-        <button class="btn-show btn btn-outline-dark mr-2" id="btnShow" onClick="showFormUpload()">Or Upload Excel</button>
+        <button class="btn-show btn btn-outline-success mr-2" id="btnShow" onClick="showFormUpload()">Or Upload Excel</button>
         <button id="create" type="submit" class="btn btn-danger">Add Item</button>
         <button onclick="cancelBtn()" id="cancel" style="display: none;" type="reset" class="btn btn-light mr-2">Cancel</button>
         <button id="update" style="display: none;" type="submit" class="btn btn-danger">Update Item</button>
@@ -67,14 +67,15 @@
 
 <div id="wrapUpload" class="card shadow mb-4">
   <div class="card-body">
-    <div>Upload Excel</div>
+    <div>Upload Excel </div>
     <button class="btn-hide btn btn-outline-danger btn-sm" id="btnHide" onClick="hideFormUpload()">hide</button>
     <form enctype="multipart/form-data" method="post" action={{url_for('upload_load_data')}} id="fileUpload" class="form-hidden">
       <div class="form-group text-center">
-        <input name="file" id="file" type="file"/>
+        <input required name="file" id="file" type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
       </div>
       <div class="text-center">
         <button id="create" type="submit" class="btn btn-danger">Process</button>
+        <a href="https://docs.google.com/spreadsheets/d/1AmJPn_60RWSBWJ-LDy20GMbo6M5QI38LLuHOS_wRjCw/edit?usp=sharing" target="new_blank" id="create" type="submit" class="btn btn-outline-danger">Example Format</a>
       </div>
     </form>
   </div>
