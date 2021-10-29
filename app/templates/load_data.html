@@ -11,6 +11,19 @@
   input[type="number"] {
     -moz-appearance: textfield;
   }
+
+  .form-hidden {
+    display: none;
+  }
+
+  .btn-hide {
+    display: none;
+  }
+
+  <!-- .btn-hide {
+    display: none;
+  } -->
+
 </style>
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">Raw Data with Google Scholar ID</h1>
@@ -43,6 +56,7 @@
         </div>
       </div>
       <div class="text-right">
+        <button class="btn-show btn btn-outline-dark mr-2" id="btnShow" onClick="showFormUpload()">Or Upload Excel</button>
         <button id="create" type="submit" class="btn btn-danger">Add Item</button>
         <button onclick="cancelBtn()" id="cancel" style="display: none;" type="reset" class="btn btn-light mr-2">Cancel</button>
         <button id="update" style="display: none;" type="submit" class="btn btn-danger">Update Item</button>
@@ -50,6 +64,21 @@
     </div>
   </div>
 </form>
+
+<div id="wrapUpload" class="card shadow mb-4">
+  <div class="card-body">
+    <div>Upload Excel</div>
+    <button class="btn-hide btn btn-outline-danger btn-sm" id="btnHide" onClick="hideFormUpload()">hide</button>
+    <form enctype="multipart/form-data" method="post" action={{url_for('upload_load_data')}} id="fileUpload" class="form-hidden">
+      <div class="form-group text-center">
+        <input name="file" id="file" type="file"/>
+      </div>
+      <div class="text-center">
+        <button id="create" type="submit" class="btn btn-danger">Process</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 <div class="card shadow mb-4">
   <div class="card-body">
@@ -104,6 +133,9 @@
 </div>
 
 <script>
+  const wrapUpload = document.querySelector("#wrapUpload");
+  wrapUpload.style.display = "none";
+
   function editItem(id){
     const getEl = document.querySelector(`#data_${id}`);
     const nidn = getEl.getElementsByTagName('td')[1].textContent
@@ -128,6 +160,29 @@
     document.querySelector("#update").style.display = 'none';
     document.querySelector("#cancel").style.display = 'none';
     document.querySelector("#formInput").action = "/load-data/add";
+  }
+
+  function showFormUpload(){
+    const form = document.querySelector("#fileUpload");
+    const btnHide = document.querySelector("#btnHide");
+    const btnShow = document.querySelector("#btnShow");
+    const formInput = document.querySelector("#formInput")
+    
+    form.style.display = "block";
+    btnHide.style.display = "block";
+    formInput.style.display = "none";
+    wrapUpload.style.display = "block";
+  }
+
+  function hideFormUpload(){
+    const form = document.querySelector("#fileUpload");
+    const btnHide = document.querySelector("#btnHide");
+    const btnShow = document.querySelector("#btnShow");
+    const formInput = document.querySelector("#formInput")
+        
+    form.style.display = "none";
+    btnHide.style.display = "none";
+    formInput.style.display = "block";
   }
 </script>
 {% endblock %}

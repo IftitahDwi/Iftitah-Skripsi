@@ -1,6 +1,7 @@
 from app import server, db
 from app.models.DataLoad import DataLoad
 from flask import render_template, request, redirect, url_for
+import pandas as pd
 
 @server.route("/load-data")
 def load_data():
@@ -40,4 +41,13 @@ def update_load_data():
     data_load.load_name = load_name
     data_load.gs_id = gs_id
     db.session.commit()
+  return redirect(url_for('load_data'))
+
+@server.route('/load-data/upload', methods=['POST', 'GET'])
+def upload_load_data():
+  if request.method == "POST":
+    file = request.files['file']
+    # file = request.form['file']
+    df = pd.read_excel(file)
+    print(df)
   return redirect(url_for('load_data'))
