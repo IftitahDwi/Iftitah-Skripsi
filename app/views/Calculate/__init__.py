@@ -11,7 +11,7 @@ from app.utils.apriori_calculate import call_calc
 def calculate():
   total_data = db.session.query(Scrapped, DataLoad).filter(DataLoad.id == Scrapped.data_load_id).order_by(Scrapped.id.desc()).count()
   db.session.close()
-  return render_template("calculate.html",total_data=total_data)
+  return render_template("calculate.html",total_data=total_data, title="Calculate")
 
 @server.route("/calculate/process", methods=["GET", "POST"])
 def calculate_process():
@@ -61,4 +61,4 @@ def calculate_process():
 @server.route("/calculate/result")
 def calculate_result():
   data_result = session.get('data_result', None)
-  return render_template("calculate-result.html", data_result=data_result)
+  return render_template("calculate-result.html", data_result=data_result, title="Calculate")

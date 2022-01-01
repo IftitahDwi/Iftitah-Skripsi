@@ -5,7 +5,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>app JOS</title>
+    <title>
+    {% block title %}
+    {% if title %}
+        {{title}} - App Jos
+    {% else %}
+        App Jos
+    {% endif %}
+    {% endblock %}
+    </title>
     <!-- Custom fonts for this template-->
     <link href={{url_for('static',
     filename='vendor/fontawesome-free/css/all.min.css')}} rel="stylesheet"
@@ -131,6 +139,7 @@
   <script src={{url_for('static', filename='vendor/datatables/buttons.bootstrap4.min.js')}}></script>
   <script src={{url_for('static', filename='vendor/datatables/jszip.min.js')}}></script>
   <script>
+    const title="{{title}}";
     $(document).ready(function() {
         $('#dataTable').DataTable({
             dom: 'lBfrtip',
@@ -138,7 +147,8 @@
             {
                 extend:    'excelHtml5',
                 text:      '<i class="fas fa-file-excel" aria-hidden="true"></i> Export to Excel',
-                titleAttr: 'Excel'
+                titleAttr: 'Excel',
+                title
             },
             ]
         });
@@ -154,19 +164,21 @@
           const dataTable_filter = document.querySelector('#dataTable_filter');
           
           const divTwo = document.createElement('div');
-          divTwo.id = 'divTwo';
-          divTwo.classList.add('d-flex', 'justify-content-between', 'mb-3');
-          divTwo.innerHTML = '';
+          divTwo.id = "divTwo";
+          divTwo.classList.add("d-flex", "justify-content-between", "mb-3", "align-items-center");
+          divTwo.innerHTML = "";
 
           const divWrapBtn = document.createElement('div');
           divWrapBtn.id = 'divWrapBtn';
-          divWrapBtn.classList.add('d-flex', 'justify-content-between');
-          divWrapBtn.innerHTML = '';
+          divWrapBtn.classList.add('d-flex', 'justify-content-between',"align-items-center");
+          divWrapBtn.innerHTML = "";
 
           parentT.insertBefore(divTwo, dataTable_length);
           divWrapBtn.append(buttonExport,dataTable_filter);
           divTwo.append(dataTable_length,  divWrapBtn);
-          buttonExport.classList.add("mr-2");
+          const btnColor = document.querySelector(".buttons-html5");
+          btnColor.classList.remove("btn-secondary");
+          btnColor.classList.add("mr-2", "btn-success");
     }, 100);
     
   </script>

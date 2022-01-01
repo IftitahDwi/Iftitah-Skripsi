@@ -35,4 +35,4 @@ def preprocessing():
           new_data_set.append(data_result)
 
   db.session.close()
-  return render_template("preprocessing.html",result_datas = new_data_set)
+  return render_template("preprocessing.html",result_datas = new_data_set, title="Preprocessing")
