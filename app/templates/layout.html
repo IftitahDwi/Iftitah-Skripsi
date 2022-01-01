@@ -125,10 +125,54 @@
 
   <!-- Page level plugins -->
   <script src={{url_for('static', filename='vendor/datatables/jquery.dataTables.min.js')}}></script>
+  <script src={{url_for('static', filename='vendor/datatables/dataTables.buttons.min.js')}}></script>
   <script src={{url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.js')}}></script>
+  <script src={{url_for('static', filename='vendor/datatables/buttons.html5.min.js')}}></script>
+  <script src={{url_for('static', filename='vendor/datatables/buttons.bootstrap4.min.js')}}></script>
+  <script src={{url_for('static', filename='vendor/datatables/jszip.min.js')}}></script>
+  <script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable({
+            dom: 'lBfrtip',
+            buttons: [
+            {
+                extend:    'excelHtml5',
+                text:      '<i class="fas fa-file-excel" aria-hidden="true"></i> Export to Excel',
+                titleAttr: 'Excel'
+            },
+            ]
+        });
+    });
+
+    
+  </script>
+  <script>
+      setTimeout(()=> {
+          const parentT = document.querySelector('#dataTable_wrapper');
+          const dataTable_length = document.querySelector('#dataTable_length');
+          const buttonExport = document.querySelector('.dt-buttons');
+          const dataTable_filter = document.querySelector('#dataTable_filter');
+          
+          const divTwo = document.createElement('div');
+          divTwo.id = 'divTwo';
+          divTwo.classList.add('d-flex', 'justify-content-between', 'mb-3');
+          divTwo.innerHTML = '';
+
+          const divWrapBtn = document.createElement('div');
+          divWrapBtn.id = 'divWrapBtn';
+          divWrapBtn.classList.add('d-flex', 'justify-content-between');
+          divWrapBtn.innerHTML = '';
+
+          parentT.insertBefore(divTwo, dataTable_length);
+          divWrapBtn.append(buttonExport,dataTable_filter);
+          divTwo.append(dataTable_length,  divWrapBtn);
+          buttonExport.classList.add("mr-2");
+    }, 100);
+    
+  </script>
 
   <!-- Page level custom scripts -->
-  <script src={{url_for('static', filename='js/demo/datatables-demo.js')}}></script>
+  <!-- <script src={{url_for('static', filename='js/demo/datatables-demo.js')}}></scrip> -->
 
   </body>
 </html>
