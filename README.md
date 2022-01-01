@@ -54,3 +54,28 @@ python run.py
 
 Access to the browser with address [127.0.0.1:5000](127.0.0.1:5000)
 
+
+
+# Note:
+
+Revision (01/01/2022)
+
+1.  add button export excel
+
+To apply this revision:
+
+1. commit all code changed in local project (git)
+
+2. move and create  new branch, like "export-excel"
+
+   ```bash
+   git checkout -b export-excel
+   ```
+
+3. pull on branch "export-excel"
+
+   ```bash
+   git pull origin export-excel
+   ```
+
+4. run as usual
