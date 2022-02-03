@@ -22,17 +22,25 @@ def preprocessing():
   
   case_folding_data = case_folding(scrapped)
   lang_detect_data = lang_detect(case_folding_data)
-  stopword_data = stopword_title(lang_detect_data)
-  stemmed_data = stemmed(stopword_data)
 
-  new_data_set=[]
-  for data in stemmed_data:
-      for new_data in data["title"].split(" "):
-          data_result = {
-          "name": data["name"],
-          "gs_id": data["gs_id"],
-          "title": new_data, "year": data["year"]}
-          new_data_set.append(data_result)
+  #filter and insert early title to prepocessing title
+  source_data = []
+  for source in scrapped:
+    for result in lang_detect_data:
+      if source["id"] == result["id"]:
+        new_data = {
+          "id": result["id"],
+          "name": result["name"],
+          "s_title": source["title"],
+          "title": result["title"],
+          "year": result["year"],
+          "gs_id": result["gs_id"]
+        }
+        source_data.append(new_data)
+
+  stopword_data = stopword_title(source_data)
+  stemmed_data = stemmed(stopword_data)
+  print("this is final")
 
   db.session.close()
-  return render_template("preprocessing.html",result_datas = new_data_set, title="Preprocessing")
+  return render_template("preprocessing.html",result_datas = stemmed_data, title="Preprocessing")
