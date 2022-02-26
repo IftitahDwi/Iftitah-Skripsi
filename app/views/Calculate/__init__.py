@@ -19,6 +19,7 @@ def calculate_process():
     support = float(request.form['support']) / 100
     print(support)
     confidence = float(request.form['confidence']) / 100
+    outputFilter = int(request.form['outputFilter'])
 
     join_data = db.session.query(Scrapped, DataLoad).filter(DataLoad.id == Scrapped.data_load_id).order_by(Scrapped.id.desc())
     scrapped = []
@@ -44,7 +45,8 @@ def calculate_process():
         data_set_new.append(dn)
       new_data.append(data_set_new)
     
-    data_result = call_calc(new_data,support,confidence)
+    data_result = call_calc(new_data,support,confidence, outputFilter)
+    # print(data_result)
     if data_result == False:
       data_result = []
       # session['data_result'] = data_result
@@ -53,8 +55,8 @@ def calculate_process():
     else:
       # session['data_result'] = data_result
       db.session.close()
-      if len(data_result) > 100:
-        data_result = data_result[:100]
+      if len(data_result) > 1000:
+        data_result = data_result[:1000]
       return render_template("calculate-result.html", data_result=data_result)
       # return redirect(url_for("calculate_result"))
 

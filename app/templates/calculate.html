@@ -42,7 +42,7 @@
         <div class="col-6">
           <label>Output Filter</label>
           <select name="outputFilter" class="custom-select" id="outputFilter">
-            <option selected>Choose...</option>
+            <option value="" selected>Choose...</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
@@ -60,27 +60,22 @@
 <script>
   const confidence = document.querySelector("#confidence");
   const support = document.querySelector("#support");
-  const btnProcess = document.querySelector("#process")
+  const outputFilter = document.querySelector("#outputFilter");
+  const btnProcess = document.querySelector("#process");
   btnProcess.disabled = true;
 
   function disabledBtn() {
-    if (confidence.value === '' || support.value === '') {
+    if (confidence.value === "" || support.value === "" || outputFilter.value === "") {
       btnProcess.disabled = true;
     } else {
       btnProcess.disabled = false;
     }
   }
 
-  function checkSupport() {
-    disabledBtn()
-  }
 
-  function checkConfidence() {
-    disabledBtn()
-  }
-
-  support.addEventListener("input", checkSupport)
-  confidence.addEventListener("input", checkConfidence)
+  support.addEventListener("input", disabledBtn);
+  confidence.addEventListener("input", disabledBtn);
+  outputFilter.addEventListener("change", disabledBtn);
 
 
 </script>
