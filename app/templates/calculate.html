@@ -23,36 +23,31 @@
       <div class="row">
         <div class="col-6 mb-3">
           <label>Support Minimum(%)</label><span class="text-danger">*</span>
-          <input
-            id="support"
-            name="support"
-            type="text"
-            class="form-control"
-          />
+          <input id="support" name="support" type="text" class="form-control" />
         </div>
       </div>
       <div class="row">
         <div class="col-6 mb-3">
           <label>Confidence Minimum(%)</label><span class="text-danger">*</span>
-          <input
-            id="confidence"
-            name="confidence"
-            type="text"
-            class="form-control"
-          />
+          <input id="confidence" name="confidence" type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 mb-3">
+          <label>Publication Total</label>
+          <input name="publication" id="publication" value="{{total_data}}" disabled type="text" class="form-control" />
         </div>
       </div>
       <div class="row">
         <div class="col-6">
-          <label>Publication Total</label>
-          <input
-            name="publication"
-            id="publication"
-            value="{{total_data}}"
-            disabled
-            type="text"
-            class="form-control"
-          />
+          <label>Output Filter</label>
+          <select name="outputFilter" class="custom-select" id="outputFilter">
+            <option selected>Choose...</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+
         </div>
       </div>
       <button id="process" type="submit" class="btn btn-danger mt-4">
@@ -63,29 +58,29 @@
 </div>
 
 <script>
-const confidence = document.querySelector("#confidence");
-const support = document.querySelector("#support");
-const btnProcess = document.querySelector("#process")
-btnProcess.disabled = true;
+  const confidence = document.querySelector("#confidence");
+  const support = document.querySelector("#support");
+  const btnProcess = document.querySelector("#process")
+  btnProcess.disabled = true;
 
-function disabledBtn(){
-  if (confidence.value === '' || support.value === ''){
-    btnProcess.disabled = true;
-  } else {
-    btnProcess.disabled = false;
+  function disabledBtn() {
+    if (confidence.value === '' || support.value === '') {
+      btnProcess.disabled = true;
+    } else {
+      btnProcess.disabled = false;
+    }
   }
-}
 
-function checkSupport(){
-  disabledBtn()
-}
+  function checkSupport() {
+    disabledBtn()
+  }
 
-function checkConfidence(){
-  disabledBtn()
-}
+  function checkConfidence() {
+    disabledBtn()
+  }
 
-support.addEventListener("input",checkSupport)
-confidence.addEventListener("input",checkConfidence)
+  support.addEventListener("input", checkSupport)
+  confidence.addEventListener("input", checkConfidence)
 
 
 </script>
